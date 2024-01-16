@@ -48,181 +48,185 @@ class _RegisterScreenState extends State<RegisterScreen> {
           physics: const BouncingScrollPhysics(),
           child: Form(
             key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Register Account',
-                  style: GoogleFonts.aBeeZee(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 4,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Register Account',
+                    style: GoogleFonts.aBeeZee(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 4,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Stack(
-                  children: [
-                    _image == null
-                        ? const CircleAvatar(
-                            radius: 65,
-                            child: Icon(
-                              Icons.person,
-                              size: 70,
-                              // color: Colors.white,
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Stack(
+                    children: [
+                      _image == null
+                          ? const CircleAvatar(
+                              radius: 65,
+                              child: Icon(
+                                Icons.person,
+                                size: 70,
+                                // color: Colors.white,
+                              ),
+                            )
+                          : CircleAvatar(
+                              radius: 65,
+                              backgroundImage: MemoryImage(_image!),
                             ),
-                          )
-                        : CircleAvatar(
-                            radius: 65,
-                            backgroundImage: MemoryImage(_image!),
+                      Positioned(
+                        right: 0,
+                        top: 15,
+                        child: IconButton(
+                          onPressed: () {
+                            selectProfileImage();
+                          },
+                          icon: const Icon(
+                            CupertinoIcons.photo,
                           ),
-                    Positioned(
-                      right: 0,
-                      top: 15,
-                      child: IconButton(
-                        onPressed: () {
-                          selectProfileImage();
-                        },
-                        icon: const Icon(
-                          CupertinoIcons.photo,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    onChanged: (value) {
+                      email = value;
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Email Address must be Not Empty';
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                      labelText: "Email Address",
+                      labelStyle: GoogleFonts.aBeeZee(),
+                      hintText: "Enter Email Address",
+                      hintStyle: GoogleFonts.aBeeZee(),
+                      prefixIcon: const Icon(
+                        Icons.email,
+                        color: Colors.pink,
+                      ),
+                      // border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    onChanged: (value) {
+                      fullName = value;
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Full Name Must not be empty';
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                      labelText: "Full Name",
+                      labelStyle: GoogleFonts.aBeeZee(),
+                      hintText: 'Enter Full Name',
+                      hintStyle: GoogleFonts.aBeeZee(),
+                      prefixIcon: const Icon(
+                        Icons.person,
+                        color: Colors.pink,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    onChanged: (value) {
+                      password = value;
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Password Must not be Empty';
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                      labelText: "Password",
+                      labelStyle: GoogleFonts.aBeeZee(),
+                      hintText: 'Enter your password',
+                      hintStyle: GoogleFonts.aBeeZee(),
+                      prefixIcon: const Icon(
+                        Icons.lock,
+                        color: Colors.pink,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        // print(email);
+                        // print(fullName);
+                        // print(password);
+                        _authController.createNewUser(
+                          email,
+                          fullName,
+                          password,
+                          _image,
+                        );
+                      } else {
+                        print('Not valid');
+                      }
+                    },
+                    child: Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width - 40,
+                      decoration: BoxDecoration(
+                        color: Colors.pink,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Register',
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            letterSpacing: 4,
+                          ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    email = value;
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Email Address must be Not Empty';
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: InputDecoration(
-                    labelText: "Email Address",
-                    labelStyle: GoogleFonts.aBeeZee(),
-                    hintText: "Enter Email Address",
-                    hintStyle: GoogleFonts.aBeeZee(),
-                    prefixIcon: const Icon(
-                      Icons.email,
-                      color: Colors.pink,
-                    ),
-                    // border: OutlineInputBorder(),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    fullName = value;
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Full Name Must not be empty';
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: InputDecoration(
-                    labelText: "Full Name",
-                    labelStyle: GoogleFonts.aBeeZee(),
-                    hintText: 'Enter Full Name',
-                    hintStyle: GoogleFonts.aBeeZee(),
-                    prefixIcon: const Icon(
-                      Icons.person,
-                      color: Colors.pink,
-                    ),
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    password = value;
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Password Must not be Empty';
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: InputDecoration(
-                    labelText: "Password",
-                    labelStyle: GoogleFonts.aBeeZee(),
-                    hintText: 'Enter your password',
-                    hintStyle: GoogleFonts.aBeeZee(),
-                    prefixIcon: const Icon(
-                      Icons.lock,
-                      color: Colors.pink,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      // print(email);
-                      // print(fullName);
-                      // print(password);
-                      _authController.createNewUser(
-                        email,
-                        fullName,
-                        password,
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                        ),
                       );
-                    } else {
-                      print('Not valid');
-                    }
-                  },
-                  child: Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width - 40,
-                    decoration: BoxDecoration(
-                      color: Colors.pink,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Register',
-                        style: GoogleFonts.aBeeZee(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          letterSpacing: 4,
-                        ),
-                      ),
+                    },
+                    child: Text(
+                      'Already Have An Account?',
+                      style: GoogleFonts.aBeeZee(),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginPage(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'Already Have An Account?',
-                    style: GoogleFonts.aBeeZee(),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
