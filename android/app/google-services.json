@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "919212311150",
+    "project_id": "multi-shop-app-2a224",
+    "storage_bucket": "multi-shop-app-2a224.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919212311150:android:dcb7c56ab06dcbc5bb9c7f",
+        "android_client_info": {
+          "package_name": "com.example.multi_shop_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApNUd8Q02sOx_f2Xmh00cyCoIVxUtn56o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
